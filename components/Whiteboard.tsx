@@ -21,6 +21,12 @@ enum TOOL {
 interface WhiteBoardProps {
   remoteSocketId?: string
 }
+interface WhiteboardData {
+  data: {
+    action: string;
+    value: any; // Replace 'any' with a more specific type if possible
+  }
+}
 
 const WhiteBoard: React.FC<WhiteBoardProps> = (props) => {
   const { remoteSocketId } = props
@@ -93,9 +99,9 @@ const WhiteBoard: React.FC<WhiteBoardProps> = (props) => {
   }, [selectedTool])
 
   const handleIncommingWhiteBoardData = React.useCallback(
-    (data) => {
+    (data: WhiteboardData) => {
       const { action, value } = data.data
-
+  
       if (action === 'WHITEBOARD_CHANGE') {
         editor?.canvas.loadFromJSON(value, () => {
           editor?.canvas.renderAll()

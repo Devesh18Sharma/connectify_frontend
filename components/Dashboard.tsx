@@ -104,7 +104,7 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
                 controls={false}
                 pip
                 muted={pinVideo.id === userStream?.id}
-              />
+              /> as any
               <button
                 className="absolute top-[50%] left-0 right-0 hidden group-hover:block"
                 onClick={handleUnPinVideo}

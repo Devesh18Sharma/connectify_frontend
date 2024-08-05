@@ -28,7 +28,17 @@ interface MessageProps extends Message {}
 interface ChatProps {
   remoteSocketId?: string
 }
-
+interface MessageData {
+  from: string;
+  message: {
+    message: string;
+  };
+  user: {
+    username: string;
+    displayPicture: string;
+  };
+  self?: boolean;
+}
 const Message: React.FC<MessageProps> = (props) => {
   const { from, message, isSelf, displayPicture, timestamp } = props
 
@@ -108,7 +118,7 @@ const Chat: React.FC<ChatProps> = (props) => {
 
   const toggleChatBox = React.useCallback(() => setOpened((e) => !e), [])
 
-  const handleOnMessage = React.useCallback((data) => {
+  const handleOnMessage = React.useCallback((data: MessageData) => {
     const { from, message, user, self = false } = data
     setMessages((e) => [
       ...e,
